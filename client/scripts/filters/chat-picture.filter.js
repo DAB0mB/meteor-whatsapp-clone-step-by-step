@@ -11,5 +11,5 @@ function chatPicture () {
     var hasPicture = otherUser && otherUser.profile && otherUser.profile.picture;
 
     return hasPicture ? otherUser.profile.picture : chat.picture || '/user-default.svg';
-  }
+  };
 }

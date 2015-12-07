@@ -3,22 +3,20 @@ Meteor.publish('users', function () {
 });
 
 Meteor.publishComposite('chats', function () {
-  if (! this.userId) {
-    return;
-  }
+  if (! this.userId) return;
 
   return {
-    find: function () {
+    find() {
       return Chats.find({ userIds: this.userId });
     },
     children: [
       {
-        find: function (chat) {
+        find(chat) {
           return Messages.find({ chatId: chat._id });
         }
       },
       {
-        find: function (chat) {
+        find(chat) {
           var query = { _id: { $in: chat.userIds } };
           var options = { fields: { profile: 1 } };
 
@@ -26,5 +24,5 @@ Meteor.publishComposite('chats', function () {
         }
       }
     ]
-  }
+  };
 });

@@ -12,5 +12,5 @@ function calendar () {
       lastWeek : 'dddd',
       sameElse : 'DD/MM/YY'
     });
-  }
+  };
 }
