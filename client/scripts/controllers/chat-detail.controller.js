@@ -8,12 +8,12 @@ function ChatDetailCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, 
   var chatId = $stateParams.chatId;
   var isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
 
-  $scope.data = {};
-  $scope.sendMessage = sendMessage;
-  $scope.inputUp = inputUp;
-  $scope.inputDown = inputDown;
-  $scope.closeKeyboard = closeKeyboard;
-  $scope.sendPicture = sendPicture;
+  this.data = {};
+  this.sendMessage = sendMessage;
+  this.inputUp = inputUp;
+  this.inputDown = inputDown;
+  this.closeKeyboard = closeKeyboard;
+  this.sendPicture = sendPicture;
 
   $scope.helpers({
     messages() {
@@ -59,22 +59,22 @@ function ChatDetailCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, 
   }
 
   function sendMessage () {
-    if (_.isEmpty($scope.data.message)) {
+    if (_.isEmpty(this.data.message)) {
       return;
     }
 
     Meteor.call('newMessage', {
-      text: $scope.data.message,
+      text: this.data.message,
       type: 'text',
       chatId: chatId
     });
 
-    delete $scope.data.message;
+    delete this.data.message;
   }
 
   function inputUp () {
     if (isIOS) {
-      $scope.data.keyboardHeight = 216;
+      this.data.keyboardHeight = 216;
     }
 
     $timeout(() => {
@@ -84,7 +84,7 @@ function ChatDetailCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, 
 
   function inputDown () {
     if (isIOS) {
-      $scope.data.keyboardHeight = 0;
+      this.data.keyboardHeight = 0;
     }
 
     $ionicScrollDelegate.$getByHandle('chatScroll').resize();

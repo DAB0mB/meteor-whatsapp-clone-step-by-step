@@ -5,7 +5,7 @@ angular
 function SettingsCtrl($scope, $reactive, $state) {
   $reactive(this).attach($scope);
 
-  $scope.logout = logout;
+  this.logout = logout;
 
   ////////////
 

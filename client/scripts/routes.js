@@ -22,7 +22,7 @@ function config($stateProvider, $urlRouterProvider) {
       views: {
         'tab-chats': {
           templateUrl: 'client/templates/chats.html',
-          controller: 'ChatsCtrl'
+          controller: 'ChatsCtrl as chats',
         }
       }
     })
@@ -31,24 +31,24 @@ function config($stateProvider, $urlRouterProvider) {
       views: {
         'tab-chats': {
           templateUrl: 'client/templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+          controller: 'ChatDetailCtrl as chat',
         }
       }
     })
     .state('login', {
       url: '/login',
       templateUrl: 'client/templates/login.html',
-      controller: 'LoginCtrl'
+      controller: 'LoginCtrl as user',
     })
     .state('confirmation', {
       url: '/confirmation/:phone',
       templateUrl: 'client/templates/confirmation.html',
-      controller: 'ConfirmationCtrl'
+      controller: 'ConfirmationCtrl as confirimation',
     })
     .state('profile', {
       url: '/profile',
       templateUrl: 'client/templates/profile.html',
-      controller: 'ProfileCtrl',
+      controller: 'ProfileCtrl as profile',
       resolve: {
         user: ['$meteor', function ($meteor) {
           return $meteor.requireUser();
@@ -60,7 +60,7 @@ function config($stateProvider, $urlRouterProvider) {
       views: {
         'tab-settings': {
           templateUrl: 'client/templates/settings.html',
-          controller: 'SettingsCtrl'
+          controller: 'SettingsCtrl as settings',
         }
       }
     });

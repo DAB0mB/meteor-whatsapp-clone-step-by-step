@@ -1,15 +1,15 @@
 <ion-view title="Profile">
   <ion-nav-buttons side="right">
-    <button ng-click="updateName()" ng-disabled="!data.name || data.name.length === 0" class="button button-clear button-positive">Done</button>
+    <button ng-click="profile.updateName()" ng-disabled="!profile.data.name || profile.data.name.length === 0" class="button button-clear button-positive">Done</button>
   </ion-nav-buttons>
 
   <ion-content class="profile">
-    <a class="profile-picture positive" ng-click="updatePicture()">
-      <div ng-if="currentUser.profile.picture">
-        <img ng-src="{{ currentUser.profile.picture }}" alt="profile picture">
+    <a class="profile-picture positive" ng-click="profile.updatePicture()">
+      <div ng-if="profile.currentUser.profile.picture">
+        <img ng-src="{{ profile.currentUser.profile.picture }}" alt="profile picture">
         edit
       </div>
-      <div ng-if="!currentUser.profile.picture" class="upload-placehoder">
+      <div ng-if="!profile.currentUser.profile.picture" class="upload-placehoder">
         Add photo
       </div>
     </a>
@@ -20,7 +20,7 @@
 
     <div class="list profile-name">
       <label class="item item-input">
-        <input ng-model="data.name" on-return="updateName()" type="text" placeholder="Your name">
+        <input ng-model="profile.data.name" on-return="profile.updateName()" type="text" placeholder="Your name">
       </label>
     </div>
   </ion-content>

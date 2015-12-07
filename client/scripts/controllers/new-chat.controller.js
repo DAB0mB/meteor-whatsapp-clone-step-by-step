@@ -5,8 +5,8 @@ angular
 function NewChatCtrl($scope, $reactive, $state) {
   $reactive(this).attach($scope);
 
-  $scope.hideModal = hideModal;
-  $scope.newChat = newChat;
+  this.hideModal = hideModal;
+  this.newChat = newChat;
 
   $scope.subscribe('users');
 
@@ -19,7 +19,7 @@ function NewChatCtrl($scope, $reactive, $state) {
   ////////////
 
   function hideModal() {
-    $scope.modal.hide();
+    this.modal.hide();
   }
 
   function newChat(userId) {

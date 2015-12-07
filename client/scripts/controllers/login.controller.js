@@ -5,19 +5,19 @@ angular
 function LoginCtrl($scope, $reactive, $state, $ionicLoading, $ionicPopup, $log) {
   $reactive(this).attach($scope);
 
-  $scope.data = {};
-  $scope.login = login;
+  this.data = {};
+  this.login = login;
 
   ////////////
 
   function login() {
-    if (_.isEmpty($scope.data.phone)) {
+    if (_.isEmpty(this.data.phone)) {
       return;
     }
 
     var confirmPopup = $ionicPopup.confirm({
       title: 'Number confirmation',
-      template: '<div>' + $scope.data.phone + '</div><div>Is your phone number above correct?</div>',
+      template: '<div>' + this.data.phone + '</div><div>Is your phone number above correct?</div>',
       cssClass: 'text-center',
       okText: 'Yes',
       okType: 'button-positive button-clear',
@@ -32,14 +32,14 @@ function LoginCtrl($scope, $reactive, $state, $ionicLoading, $ionicPopup, $log) 
         template: 'Sending verification code...'
       });
 
-      Accounts.requestPhoneVerification($scope.data.phone, (err) => {
+      Accounts.requestPhoneVerification(this.data.phone, (err) => {
         $ionicLoading.hide();
 
         if (err) {
           return handleError(err);
         }
 
-        $state.go('confirmation', {phone: $scope.data.phone});
+        $state.go('confirmation', {phone: this.data.phone});
       });
     });
   }

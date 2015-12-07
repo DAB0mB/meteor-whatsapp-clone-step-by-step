@@ -5,8 +5,8 @@ angular
 function ChatsCtrl ($scope, $reactive, $ionicModal) {
   $reactive(this).attach($scope);
 
-  $scope.openNewChatModal = openNewChatModal;
-  $scope.remove = remove;
+  this.openNewChatModal = openNewChatModal;
+  this.remove = remove;
 
   $scope.helpers({
     chats() {
@@ -15,22 +15,22 @@ function ChatsCtrl ($scope, $reactive, $ionicModal) {
   });
 
   $scope.$on('$destroy', function () {
-    $scope.modal.remove();
+    this.modal.remove();
   });
 
   $ionicModal.fromTemplateUrl('client/templates/new-chat.html', {
     scope: $scope
   }).then((modal) => {
-    $scope.modal = modal;
+    this.modal = modal;
   });
 
   ////////////
 
   function openNewChatModal () {
-    $scope.modal.show();
+    this.modal.show();
   }
 
   function remove (chat) {
-    $meteor.call('removeChat', chat._id);
+    Meteor.call('removeChat', chat._id);
   }
 }
