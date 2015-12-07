@@ -2,19 +2,11 @@ angular
   .module('Whatsapp')
   .controller('ChatDetailCtrl', ChatDetailCtrl);
 
-function ChatDetailCtrl ($scope, $stateParams, $ionicScrollDelegate, $timeout, $meteor, $ionicPopup, $log) {
+function ChatDetailCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeout, $ionicPopup, $log) {
+  $reactive(this).attach($scope);
+
   var chatId = $stateParams.chatId;
   var isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
-  $scope.chat = $scope.$meteorObject(Chats, chatId, false);
-
-  $scope.messages = $scope.$meteorCollection(function () {
-    return Messages.find({ chatId: chatId });
-  }, false);
-
-  $scope.$watchCollection('messages', function (oldVal, newVal) {
-    var animate = oldVal.length !== newVal.length;
-    $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(animate);
-  });
 
   $scope.data = {};
   $scope.sendMessage = sendMessage;
@@ -23,10 +15,24 @@ function ChatDetailCtrl ($scope, $stateParams, $ionicScrollDelegate, $timeout, $
   $scope.closeKeyboard = closeKeyboard;
   $scope.sendPicture = sendPicture;
 
-  ///
+  $scope.helpers({
+    messages() {
+      return Messages.find({ chatId: chatId });
+    },
+    chat() {
+      return Chats.findOne(chatId);
+    },
+  });
+
+  $scope.$watchCollection('messages', (oldVal, newVal) => {
+    var animate = oldVal.length !== newVal.length;
+    $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(animate);
+  });
+
+  ////////////
 
   function sendPicture () {
-    MeteorCameraUI.getPicture({}, function (err, data) {
+    MeteorCameraUI.getPicture({}, (err, data) => {
       if (err && err.error == 'cancel') {
         return;
       }
@@ -35,7 +41,7 @@ function ChatDetailCtrl ($scope, $stateParams, $ionicScrollDelegate, $timeout, $
         return handleError(err);
       }
 
-      $meteor.call('newMessage', {
+      Meteor.call('newMessage', {
         picture: data,
         type: 'picture',
         chatId: chatId
@@ -57,8 +63,9 @@ function ChatDetailCtrl ($scope, $stateParams, $ionicScrollDelegate, $timeout, $
       return;
     }
 
-    $meteor.call('newMessage', {
+    Meteor.call('newMessage', {
       text: $scope.data.message,
+      type: 'text',
       chatId: chatId
     });
 
@@ -70,7 +77,7 @@ function ChatDetailCtrl ($scope, $stateParams, $ionicScrollDelegate, $timeout, $
       $scope.data.keyboardHeight = 216;
     }
 
-    $timeout(function() {
+    $timeout(() => {
       $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(true);
     }, 300);
   }

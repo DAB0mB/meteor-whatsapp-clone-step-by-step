@@ -2,7 +2,9 @@ angular
   .module('Whatsapp')
   .controller('LoginCtrl', LoginCtrl);
 
-function LoginCtrl($scope, $state, $ionicLoading, $ionicPopup, $log) {
+function LoginCtrl($scope, $reactive, $state, $ionicLoading, $ionicPopup, $log) {
+  $reactive(this).attach($scope);
+
   $scope.data = {};
   $scope.login = login;
 
@@ -23,16 +25,14 @@ function LoginCtrl($scope, $state, $ionicLoading, $ionicPopup, $log) {
       cancelType: 'button-dark button-clear'
     });
 
-    confirmPopup.then(function (res) {
-      if (!res) {
-        return;
-      }
+    confirmPopup.then((res) => {
+      if (! res) return;
 
       $ionicLoading.show({
         template: 'Sending verification code...'
       });
 
-      Accounts.requestPhoneVerification($scope.data.phone, function (err) {
+      Accounts.requestPhoneVerification($scope.data.phone, (err) => {
         $ionicLoading.hide();
 
         if (err) {

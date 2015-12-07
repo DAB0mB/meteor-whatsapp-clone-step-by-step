@@ -2,14 +2,13 @@ angular
   .module('Whatsapp')
   .controller('ProfileCtrl', ProfileCtrl);
 
-function ProfileCtrl ($scope, $state, $meteor, $ionicPopup, $log, $ionicLoading) {
+function ProfileCtrl ($scope, $reactive, $state, $ionicPopup, $log, $ionicLoading) {
+  $reactive(this).attach($scope);
+
   var user = Meteor.user();
   var name = user && user.profile ? user.profile.name : '';
 
-  $scope.data = {
-    name: name
-  };
-
+  $scope.data = { name: name };
   $scope.updateName = updateName;
   $scope.updatePicture = updatePicture;
 
@@ -29,11 +28,10 @@ function ProfileCtrl ($scope, $state, $meteor, $ionicPopup, $log, $ionicLoading)
         template: 'Updating picture...'
       });
 
-      $meteor.call('updatePicture', data)
-        .finally(function () {
-          $ionicLoading.hide();
-        })
-        .catch(handleError);
+      Meteor.call('updatePicture', data, (err) => {
+        $ionicLoading.hide();
+        handleError(err);
+      });
     });
   }
 
@@ -42,11 +40,10 @@ function ProfileCtrl ($scope, $state, $meteor, $ionicPopup, $log, $ionicLoading)
       return;
     }
 
-    $meteor.call('updateName', $scope.data.name)
-      .then(function () {
-        $state.go('tab.chats');
-      })
-      .catch(handleError);
+    Meteor.call('updateName', $scope.data.name, (err) => {
+      if (err) return handleError(err);
+      $state.go('tab.chats');
+    });
   }
 
   function handleError (err) {

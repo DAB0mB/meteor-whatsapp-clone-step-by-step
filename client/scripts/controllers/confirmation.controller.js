@@ -2,7 +2,9 @@ angular
   .module('Whatsapp')
   .controller('ConfirmationCtrl', ConfirmationCtrl);
 
-function ConfirmationCtrl($scope, $state, $ionicPopup, $log) {
+function ConfirmationCtrl($scope, $reactive, $state, $ionicPopup, $log) {
+  $reactive(this).attach($scope);
+
   $scope.phone = $state.params.phone;
   $scope.data = {};
   $scope.verify = verify;

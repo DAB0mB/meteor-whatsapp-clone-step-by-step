@@ -1,7 +1,7 @@
 accounts-base@1.2.2
 angular@1.3.0-rc.3
-angular-meteor-data@0.0.3
-angular-templates@0.0.1
+angular-meteor-data@0.0.7-rc.3
+angular-templates@0.0.2
 angular:angular@1.4.7
 angular:angular-animate@1.4.7
 angular:angular-sanitize@1.4.7
@@ -64,7 +64,7 @@ observe-sequence@1.0.7
 okland:accounts-phone@0.0.21
 okland:camera-ui@0.0.2
 ordered-dict@1.0.4
-pbastowski:angular-babel@1.0.2
+pbastowski:angular-babel@1.0.6
 promise@0.5.1
 random@1.0.5
 rate-limit@1.0.0
@@ -81,6 +81,7 @@ spacebars@1.0.7
 spacebars-compiler@1.0.7
 srp@1.0.4
 standard-minifiers@1.0.2
+templating@1.1.5
 templating-tools@1.0.0
 tracker@1.0.9
 ui@1.0.8

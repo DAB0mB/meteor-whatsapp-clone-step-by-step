@@ -2,21 +2,27 @@ angular
   .module('Whatsapp')
   .controller('ChatsCtrl', ChatsCtrl);
 
-function ChatsCtrl ($scope, $ionicModal) {
-  $scope.chats = $scope.$meteorCollection(Chats, false);
+function ChatsCtrl ($scope, $reactive, $ionicModal) {
+  $reactive(this).attach($scope);
 
-  $ionicModal.fromTemplateUrl('client/templates/new-chat.html', {
-    scope: $scope
-  }).then(function (modal) {
-    $scope.modal = modal;
+  $scope.openNewChatModal = openNewChatModal;
+  $scope.remove = remove;
+
+  $scope.helpers({
+    chats() {
+      return Chats.find();
+    }
   });
 
   $scope.$on('$destroy', function () {
     $scope.modal.remove();
   });
 
-  $scope.openNewChatModal = openNewChatModal;
-  $scope.remove = remove;
+  $ionicModal.fromTemplateUrl('client/templates/new-chat.html', {
+    scope: $scope
+  }).then((modal) => {
+    $scope.modal = modal;
+  });
 
   ////////////
 

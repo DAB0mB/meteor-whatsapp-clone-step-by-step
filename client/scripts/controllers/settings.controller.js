@@ -2,14 +2,18 @@ angular
   .module('Whatsapp')
   .controller('SettingsCtrl', SettingsCtrl);
 
-function SettingsCtrl($scope, $meteor, $state) {
+function SettingsCtrl($scope, $reactive, $state) {
+  $reactive(this).attach($scope);
+
   $scope.logout = logout;
 
   ////////////
 
   function logout() {
-    $meteor.logout().then(function () {
-      $state.go('login');
+    Meteor.logout((err) => {
+      if (! err) {
+        $state.go('login');
+      }
     });
   }
 }
