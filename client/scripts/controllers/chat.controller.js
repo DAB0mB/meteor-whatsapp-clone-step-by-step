@@ -5,8 +5,8 @@ angular
 function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeout, $ionicPopup, $log) {
   $reactive(this).attach($scope);
 
-  var chatId = $stateParams.chatId;
-  var isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
+  let chatId = $stateParams.chatId;
+  let isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
 
   this.data = {};
   this.sendMessage = sendMessage;
@@ -25,7 +25,7 @@ function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeo
   });
 
   $scope.$watchCollection('conversation.messages', (oldVal, newVal) => {
-    var animate = oldVal.length !== newVal.length;
+    let animate = oldVal.length !== newVal.length;
     $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(animate);
   });
 

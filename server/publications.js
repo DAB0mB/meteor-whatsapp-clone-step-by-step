@@ -17,8 +17,8 @@ Meteor.publishComposite('chats', function () {
       },
       {
         find(chat) {
-          var query = { _id: { $in: chat.userIds } };
-          var options = { fields: { profile: 1 } };
+          let query = { _id: { $in: chat.userIds } };
+          let options = { fields: { profile: 1 } };
 
           return Meteor.users.find(query, options);
         }

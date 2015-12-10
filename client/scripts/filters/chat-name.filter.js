@@ -6,9 +6,9 @@ function chatName() {
   return function (chat) {
     if (! chat) return;
 
-    var otherId = _.without(chat.userIds, Meteor.userId())[0];
-    var otherUser = Meteor.users.findOne(otherId);
-    var hasName = otherUser && otherUser.profile && otherUser.profile.name;
+    let otherId = _.without(chat.userIds, Meteor.userId())[0];
+    let otherUser = Meteor.users.findOne(otherId);
+    let hasName = otherUser && otherUser.profile && otherUser.profile.name;
 
     return hasName ? otherUser.profile.name : chat.name || 'NO NAME';
   };

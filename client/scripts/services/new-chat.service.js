@@ -5,7 +5,12 @@ angular
 function NewChat($rootScope, $ionicModal) {
   let templateUrl = 'client/templates/new-chat.html';
 
-  this.showModal = function() {
+  this.showModal = showModal;
+  this.hideModal = hideModal;
+
+  ////////////
+
+  function showModal () {
     this._scope = $rootScope.$new();
 
     $ionicModal.fromTemplateUrl(templateUrl, {
@@ -14,10 +19,10 @@ function NewChat($rootScope, $ionicModal) {
       this._modal = modal;
       modal.show();
     });
-  };
+  }
 
-  this.hideModal = function() {
+  function hideModal () {
     this._scope.$destroy();
     this._modal.remove();
-  };
+  }
 }

@@ -5,8 +5,8 @@ angular
 function ProfileCtrl ($scope, $reactive, $state, $ionicPopup, $log, $ionicLoading) {
   $reactive(this).attach($scope);
 
-  var user = Meteor.user();
-  var name = user && user.profile ? user.profile.name : '';
+  let user = Meteor.user();
+  let name = user && user.profile ? user.profile.name : '';
 
   this.data = { name: name };
   this.updateName = updateName;

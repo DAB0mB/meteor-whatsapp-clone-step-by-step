@@ -15,7 +15,7 @@ function LoginCtrl($scope, $reactive, $state, $ionicLoading, $ionicPopup, $log) 
       return;
     }
 
-    var confirmPopup = $ionicPopup.confirm({
+    let confirmPopup = $ionicPopup.confirm({
       title: 'Number confirmation',
       template: '<div>' + this.data.phone + '</div><div>Is your phone number above correct?</div>',
       cssClass: 'text-center',

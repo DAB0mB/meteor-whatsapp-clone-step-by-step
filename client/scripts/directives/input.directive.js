@@ -6,7 +6,7 @@ angular
 // and expose the focus and blur events to adjust the view
 // when the keyboard opens and closes
 function input ($timeout) {
-  var directive =  {
+  let directive =  {
     restrict: 'E',
     scope: {
       'returnClose': '=',
