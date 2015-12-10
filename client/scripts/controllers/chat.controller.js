@@ -1,8 +1,8 @@
 angular
   .module('Whatsapp')
-  .controller('ChatDetailCtrl', ChatDetailCtrl);
+  .controller('ChatCtrl', ChatCtrl);
 
-function ChatDetailCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeout, $ionicPopup, $log) {
+function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeout, $ionicPopup, $log) {
   $reactive(this).attach($scope);
 
   var chatId = $stateParams.chatId;
@@ -15,16 +15,16 @@ function ChatDetailCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, 
   this.closeKeyboard = closeKeyboard;
   this.sendPicture = sendPicture;
 
-  $scope.helpers({
+  this.helpers({
     messages() {
       return Messages.find({ chatId: chatId });
     },
-    chat() {
+    description() {
       return Chats.findOne(chatId);
     },
   });
 
-  $scope.$watchCollection('messages', (oldVal, newVal) => {
+  $scope.$watchCollection('conversation.messages', (oldVal, newVal) => {
     var animate = oldVal.length !== newVal.length;
     $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(animate);
   });

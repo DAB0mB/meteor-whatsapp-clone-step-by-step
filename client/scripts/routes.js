@@ -26,12 +26,12 @@ function config($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('tab.chat-detail', {
+    .state('tab.chat', {
       url: '/chats/:chatId',
       views: {
         'tab-chats': {
-          templateUrl: 'client/templates/chat-detail.html',
-          controller: 'ChatDetailCtrl as chat',
+          templateUrl: 'client/templates/chat.html',
+          controller: 'ChatCtrl as chat',
         }
       }
     })

@@ -7,11 +7,11 @@ function ConfirmationCtrl($scope, $reactive, $state, $ionicPopup, $log) {
 
   this.data = {};
   this.phone = $state.params.phone;
-  this.verify = verify;
+  this.confirm = confirm;
 
   ////////////
 
-  function verify() {
+  function confirm() {
     if (_.isEmpty(this.data.code)) {
       return;
     }

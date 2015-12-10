@@ -1,6 +1,6 @@
 <ion-view title="{{confirimation.phone}}">
   <ion-nav-buttons side="right">
-    <button ng-click="confirimation.verify()" ng-disabled="!confirimation.data.code || confirimation.data.code.length === 0" class="button button-clear button-positive">Done</button>
+    <button ng-click="confirimation.confirm()" ng-disabled="!confirimation.data.code || confirimation.data.code.length === 0" class="button button-clear button-positive">Done</button>
   </ion-nav-buttons>
 
   <ion-content>
@@ -13,7 +13,7 @@
 
     <div class="list padding-top">
       <label class="item item-input">
-        <input ng-model="confirimation.data.code" on-return="confirimation.verify()" type="text" placeholder="Code">
+        <input ng-model="confirimation.data.code" on-return="confirimation.confirm()" type="text" placeholder="Code">
       </label>
     </div>
   </ion-content>

@@ -2,32 +2,22 @@ angular
   .module('Whatsapp')
   .controller('ChatsCtrl', ChatsCtrl);
 
-function ChatsCtrl ($scope, $reactive, $ionicModal) {
+function ChatsCtrl ($scope, $reactive, $ionicModal, NewChat) {
   $reactive(this).attach($scope);
 
-  this.openNewChatModal = openNewChatModal;
+  this.showNewChatModal = showNewChatModal;
   this.remove = remove;
 
-  $scope.helpers({
+  this.helpers({
     chats() {
       return Chats.find();
     }
   });
 
-  $scope.$on('$destroy', function () {
-    this.modal.remove();
-  });
-
-  $ionicModal.fromTemplateUrl('client/templates/new-chat.html', {
-    scope: $scope
-  }).then((modal) => {
-    this.modal = modal;
-  });
-
   ////////////
 
-  function openNewChatModal () {
-    this.modal.show();
+  function showNewChatModal () {
+    NewChat.showModal();
   }
 
   function remove (chat) {

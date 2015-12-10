@@ -2,15 +2,15 @@ angular
   .module('Whatsapp')
   .controller('NewChatCtrl', NewChatCtrl);
 
-function NewChatCtrl($scope, $reactive, $state) {
+function NewChatCtrl($scope, $reactive, $state, NewChat) {
   $reactive(this).attach($scope);
 
-  this.hideModal = hideModal;
+  this.hideNewChatModal = hideNewChatModal;
   this.newChat = newChat;
 
-  $scope.subscribe('users');
+  this.subscribe('users');
 
-  $scope.helpers({
+  this.helpers({
     users() {
       return Meteor.users.find({ _id: { $ne: Meteor.userId() } });
     }
@@ -18,8 +18,8 @@ function NewChatCtrl($scope, $reactive, $state) {
 
   ////////////
 
-  function hideModal() {
-    this.modal.hide();
+  function hideNewChatModal() {
+    NewChat.hideModal();
   }
 
   function newChat(userId) {
@@ -32,7 +32,7 @@ function NewChatCtrl($scope, $reactive, $state) {
   }
 
   function goToChat(chatId) {
-    hideModal();
-    return $state.go('tab.chat-detail', { chatId: chatId });
+    hideNewChatModal();
+    return $state.go('tab.conversation', { chatId: chatId });
   }
 }
