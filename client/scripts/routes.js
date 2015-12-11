@@ -9,12 +9,12 @@ function config($stateProvider, $urlRouterProvider) {
       abstract: true,
       templateUrl: 'client/templates/tabs.html',
       resolve: {
-        user: ['$meteor', function ($meteor) {
-          return $meteor.requireUser();
-        }],
-        chats: ['$meteor', function ($meteor) {
-          return $meteor.subscribe('chats');
-        }]
+        user() {
+          return Meteor.user();
+        },
+        chats() {
+          return Meteor.subscribe('chats');
+        }
       }
     })
     .state('tab.chats', {
@@ -50,9 +50,9 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/profile.html',
       controller: 'ProfileCtrl as profile',
       resolve: {
-        user: ['$meteor', function ($meteor) {
-          return $meteor.requireUser();
-        }]
+        user() {
+          return Meteor.user();
+        }
       }
     })
     .state('tab.settings', {

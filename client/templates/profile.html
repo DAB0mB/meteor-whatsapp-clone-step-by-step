@@ -1,6 +1,6 @@
 <ion-view title="Profile">
   <ion-nav-buttons side="right">
-    <button ng-click="profile.updateName()" ng-disabled="!profile.data.name || profile.data.name.length === 0" class="button button-clear button-positive">Done</button>
+    <button ng-click="profile.updateName()" ng-disabled="!profile.name || profile.name.length === 0" class="button button-clear button-positive">Done</button>
   </ion-nav-buttons>
 
   <ion-content class="profile">
@@ -20,7 +20,7 @@
 
     <div class="list profile-name">
       <label class="item item-input">
-        <input ng-model="profile.data.name" on-return="profile.updateName()" type="text" placeholder="Your name">
+        <input ng-model="profile.name" on-return="profile.updateName()" type="text" placeholder="Your name">
       </label>
     </div>
   </ion-content>

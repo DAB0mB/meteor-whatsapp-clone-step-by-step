@@ -8,7 +8,7 @@ function ProfileCtrl ($scope, $reactive, $state, $ionicPopup, $log, $ionicLoadin
   let user = Meteor.user();
   let name = user && user.profile ? user.profile.name : '';
 
-  this.data = { name: name };
+  this.name = name;
   this.updateName = updateName;
   this.updatePicture = updatePicture;
 
@@ -36,11 +36,11 @@ function ProfileCtrl ($scope, $reactive, $state, $ionicPopup, $log, $ionicLoadin
   }
 
   function updateName () {
-    if (_.isEmpty(this.data.name)) {
+    if (_.isEmpty(this.name)) {
       return;
     }
 
-    Meteor.call('updateName', this.data.name, (err) => {
+    Meteor.call('updateName', this.name, (err) => {
       if (err) return handleError(err);
       $state.go('tab.chats');
     });

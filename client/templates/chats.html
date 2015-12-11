@@ -6,7 +6,7 @@
   <ion-content>
     <ion-list>
       <ion-item
-              ng-repeat="chat in chats.chats | orderBy:'-lastMessage.timestamp'"
+              ng-repeat="chat in chats.data | orderBy:'-lastMessage.timestamp'"
               class="item-chat item-remove-animate item-avatar item-icon-right"
               type="item-text-wrap"
               href="#/tab/chats/{{chat._id}}">

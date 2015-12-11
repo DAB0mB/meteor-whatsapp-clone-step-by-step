@@ -9,7 +9,7 @@ function ChatsCtrl ($scope, $reactive, $ionicModal, NewChat) {
   this.remove = remove;
 
   this.helpers({
-    chats() {
+    data() {
       return Chats.find();
     }
   });

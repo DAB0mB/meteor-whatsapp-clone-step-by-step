@@ -5,18 +5,17 @@ angular
 function ConfirmationCtrl($scope, $reactive, $state, $ionicPopup, $log) {
   $reactive(this).attach($scope);
 
-  this.data = {};
   this.phone = $state.params.phone;
   this.confirm = confirm;
 
   ////////////
 
   function confirm() {
-    if (_.isEmpty(this.data.code)) {
+    if (_.isEmpty(this.code)) {
       return;
     }
 
-    Accounts.verifyPhone(this.phone, this.data.code, function (err) {
+    Accounts.verifyPhone(this.phone, this.code, function (err) {
       if (err) {
         return handleError(err);
       }

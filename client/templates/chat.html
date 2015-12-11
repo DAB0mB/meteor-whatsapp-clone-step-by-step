@@ -1,6 +1,6 @@
-<ion-view title="{{chat.description | chatName}}">
+<ion-view title="{{chat.data | chatName}}">
   <ion-nav-buttons side="right">
-    <button class="button button-clear"><img class="header-picture" ng-src="{{chat.description | chatPicture}}"></button>
+    <button class="button button-clear"><img class="header-picture" ng-src="{{chat.data | chatPicture}}"></button>
   </ion-nav-buttons>
   <ion-content class="chat" delegate-handle="chatScroll">
     <div class="message-list">
@@ -22,7 +22,7 @@
 
     <label class="item-input-wrapper">
       <input
-              ng-model="chat.data.message"
+              ng-model="chat.message"
               on-return="chat.sendMessage(); chat.closeKeyboard()"
               on-focus="chat.inputUp()"
               on-blur="chat.inputDown()"
@@ -30,10 +30,10 @@
               type="text"/>
     </label>
 
-    <span ng-if="chat.data.message.length > 0">
+    <span ng-if="chat.message.length > 0">
       <button ng-click="chat.sendMessage()" class="button button-clear button-positive">Send</button>
     </span>
-    <span ng-if="!chat.data.message || chat.data.message.length === 0">
+    <span ng-if="!chat.message || chat.message.length === 0">
       <button ng-click="chat.sendPicture()" class="button button-clear button-icon button-positive icon ion-ios-camera-outline"></button>
       <i class="buttons-seperator icon ion-android-more-vertical"></i>
       <button class="button button-clear button-icon button-positive icon ion-ios-mic-outline"></button>
